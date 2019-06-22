@@ -26,25 +26,22 @@ class ViewController: UIViewController {
         }
     }
     
+    private var calculator = CalculatorLogic()
+    
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
         //What should happen when a non-number button is pressed
         isFinishTypingNumber = true
+        
      // jesli nie bedzie mozliwosci wymusic konwersje na Double, podstaw 0
      //   let number = Double(displayLabel.text!)! ?? 0
-        
-
        
+        calculator.setNumber(displayValue)
+        
         if let calcMethod = sender.currentTitle {
-            
-            if calcMethod == "+/-" {
-              displayValue *= -1//  displayLabel.text = String(displayValue * -1)
-            }
-            if calcMethod == "AC" {
-                displayLabel.text = "0"
-            }
-            if calcMethod == "%" {
-                displayValue /= 100
+           
+            if let result = calculator.calculate(symbol: calcMethod) {
+                  displayValue = result
             }
         }
     }
